@@ -1,0 +1,42 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/pydantic/pytest-examples:
+      branch: main
+      repo: https://github.com/pydantic/pytest-examples
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/pydantic/pytest-examples git:
+        commands:
+        - /usr/bin/env sh .sqa/script.bumpy-pumpkin-mastiff.sh
+        container: qc.acc_shabby-jade-tang
+  QC.Doc:
+    repos:
+      github.com/pydantic/pytest-examples find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gloppy-ecru-chamois.sh
+        container: qc.doc_pretty-silver-mule
+      github.com/pydantic/pytest-examples git:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-ecru-vulture.sh
+        container: qc.doc_sickly-firebrick-ostrich
+  QC.Lic:
+    repos:
+      github.com/pydantic/pytest-examples licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-silver-insect.sh
+        container: qc.lic_squeaky-xanthic-ant
+  QC.Ver:
+    repos:
+      github.com/pydantic/pytest-examples get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.skimpy-sepia-coral.sh
+        container: qc.ver_flaky-puce-moose
+timeout: 5400
